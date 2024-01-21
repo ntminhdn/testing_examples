@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testing_examples/part2/feature/login_view_model.dart';
+import 'package:testing_examples/part3/feature/login_view_model.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
