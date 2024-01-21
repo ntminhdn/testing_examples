@@ -17,7 +17,6 @@ void main() {
 
       // Stubbing
       when(() => mockSharedPreferences.getString(email)).thenReturn('123456');
-      when(() => mockSharedPreferences.clear()).thenAnswer((_) => Future.value(true));
 
       // Act
       final result = loginViewModel.login(email, password);
@@ -27,13 +26,19 @@ void main() {
     });
 
     test('login should return true when the password are correct', () {
+      // Arrange
       final mockSharedPreferences = MockSharedPreferences();
       final loginViewModel = LoginViewModel(sharedPreferences: mockSharedPreferences);
       String email = 'ntminh@gmail.com';
       String password = '123456';
 
+      // Stubbing
       when(() => mockSharedPreferences.getString(email)).thenReturn('123456');
+      
+      // Act
       final result = loginViewModel.login(email, password);
+
+      // Assert
       expect(result, true);
     });
   });
