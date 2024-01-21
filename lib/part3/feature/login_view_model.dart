@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel {
@@ -14,10 +15,15 @@ class LoginViewModel {
   }
 
   Future<bool> logout() async {
-    final success = await sharedPreferences.clear();
+    bool success = false;
+    try {
+      success = await sharedPreferences.clear();
+    } catch (e) {
+      success = false;
+    }
     
     if (!success) {
-      throw Exception('Logout failed');
+      throw FlutterError('Logout failed');
     }
 
     return success;
