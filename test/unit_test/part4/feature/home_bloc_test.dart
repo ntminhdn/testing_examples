@@ -38,20 +38,15 @@ void main() {
             [],
             [JobData()..title = 'IT'],
             [JobData()..title = 'IT', JobData()..title = 'Teacher'],
-            [JobData()..title = 'IT', JobData()..title = 'Teacher', JobData()..title = 'Doctor'],
           ]));
 
       // put data to Isar
       await isar.writeTxn(() async {
-        await isar.jobDatas.put(JobData()..title = 'IT');
+        isar.jobDatas.put(JobData()..title = 'IT');
       });
 
       await isar.writeTxn(() async {
-        await isar.jobDatas.put(JobData()..title = 'Teacher');
-      });
-
-      await isar.writeTxn(() async {
-        await isar.jobDatas.put(JobData()..title = 'Doctor');
+        isar.jobDatas.put(JobData()..title = 'Teacher');
       });
     });
 

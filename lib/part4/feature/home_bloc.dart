@@ -11,7 +11,7 @@ class HomeBloc {
     });
   }
 
-  final _streamController = StreamController<List<JobData>>.broadcast();
+  final _streamController = StreamController<List<JobData>>();
   StreamSubscription? _streamSubscription;
 
   Stream<List<JobData>> get data => _streamController.stream;
