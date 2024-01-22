@@ -6,11 +6,12 @@ import 'package:testing_examples/part4/feature/login_view_model.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
-  final mockSharedPreferences = MockSharedPreferences();
-  final loginViewModel = LoginViewModel(sharedPreferences: mockSharedPreferences);
+  late MockSharedPreferences mockSharedPreferences;
+  late LoginViewModel loginViewModel;
 
   setUp(() {
-    loginViewModel.clearCache();
+    mockSharedPreferences = MockSharedPreferences();
+    loginViewModel = LoginViewModel(sharedPreferences: mockSharedPreferences);
   });
 
   group('login', () {
