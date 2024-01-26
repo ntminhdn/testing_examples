@@ -1,5 +1,3 @@
-
-
 class LoginViewModel {
   final Navigator navigator;
 
@@ -9,11 +7,18 @@ class LoginViewModel {
 
   void login(String email) {
     if (email.isNotEmpty) {
-      navigator.push('home');
+      navigator.push(Screen('home'));
+      navigator.push(Screen('profile'));
     }
   }
 }
 
 class Navigator {
-  void push(String name) {}
+  void push(Screen name) {}
+}
+
+class Screen {
+  final String name;
+
+  Screen(this.name);
 }

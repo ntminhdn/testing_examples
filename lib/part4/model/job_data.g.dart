@@ -17,8 +17,13 @@ const JobDataSchema = CollectionSchema(
   name: r'JobData',
   id: 8336812846228959456,
   properties: {
-    r'title': PropertySchema(
+    r'hashCode': PropertySchema(
       id: 0,
+      name: r'hashCode',
+      type: IsarType.long,
+    ),
+    r'title': PropertySchema(
+      id: 1,
       name: r'title',
       type: IsarType.string,
     )
@@ -53,7 +58,8 @@ void _jobDataSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.title);
+  writer.writeLong(offsets[0], object.hashCode);
+  writer.writeString(offsets[1], object.title);
 }
 
 JobData _jobDataDeserialize(
@@ -64,7 +70,7 @@ JobData _jobDataDeserialize(
 ) {
   final object = JobData();
   object.id = id;
-  object.title = reader.readString(offsets[0]);
+  object.title = reader.readString(offsets[1]);
   return object;
 }
 
@@ -76,6 +82,8 @@ P _jobDataDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readLong(offset)) as P;
+    case 1:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -171,6 +179,59 @@ extension JobDataQueryWhere on QueryBuilder<JobData, JobData, QWhereClause> {
 
 extension JobDataQueryFilter
     on QueryBuilder<JobData, JobData, QFilterCondition> {
+  QueryBuilder<JobData, JobData, QAfterFilterCondition> hashCodeEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hashCode',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<JobData, JobData, QAfterFilterCondition> hashCodeGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'hashCode',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<JobData, JobData, QAfterFilterCondition> hashCodeLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'hashCode',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<JobData, JobData, QAfterFilterCondition> hashCodeBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'hashCode',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<JobData, JobData, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -361,6 +422,18 @@ extension JobDataQueryLinks
     on QueryBuilder<JobData, JobData, QFilterCondition> {}
 
 extension JobDataQuerySortBy on QueryBuilder<JobData, JobData, QSortBy> {
+  QueryBuilder<JobData, JobData, QAfterSortBy> sortByHashCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashCode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<JobData, JobData, QAfterSortBy> sortByHashCodeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashCode', Sort.desc);
+    });
+  }
+
   QueryBuilder<JobData, JobData, QAfterSortBy> sortByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
@@ -376,6 +449,18 @@ extension JobDataQuerySortBy on QueryBuilder<JobData, JobData, QSortBy> {
 
 extension JobDataQuerySortThenBy
     on QueryBuilder<JobData, JobData, QSortThenBy> {
+  QueryBuilder<JobData, JobData, QAfterSortBy> thenByHashCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashCode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<JobData, JobData, QAfterSortBy> thenByHashCodeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashCode', Sort.desc);
+    });
+  }
+
   QueryBuilder<JobData, JobData, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -403,6 +488,12 @@ extension JobDataQuerySortThenBy
 
 extension JobDataQueryWhereDistinct
     on QueryBuilder<JobData, JobData, QDistinct> {
+  QueryBuilder<JobData, JobData, QDistinct> distinctByHashCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hashCode');
+    });
+  }
+
   QueryBuilder<JobData, JobData, QDistinct> distinctByTitle(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -416,6 +507,12 @@ extension JobDataQueryProperty
   QueryBuilder<JobData, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<JobData, int, QQueryOperations> hashCodeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hashCode');
     });
   }
 

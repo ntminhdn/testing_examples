@@ -1,12 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:testing_examples/part5/feature/login_view_model.dart';
+import 'package:testing_examples/part5/feature/any/login_view_model.dart';
 
 class MockNavigator extends Mock implements Navigator {}
 
 void main() {
   late MockNavigator mockNavigator;
   late LoginViewModel loginViewModel;
+
+  setUpAll(() {
+    registerFallbackValue(Screen('login'));
+  });
 
   setUp(() {
     mockNavigator = MockNavigator();
@@ -22,7 +26,7 @@ void main() {
       loginViewModel.login(email);
 
       // Assert
-      verifyNever(() => mockNavigator.push('home'));
+      verifyNever(() => mockNavigator.push(any()));
     });
 
     test('navigator.push should be called once when the email is not empty', () {
@@ -33,7 +37,7 @@ void main() {
       loginViewModel.login(email);
 
       // Assert
-      verify(() => mockNavigator.push('home')).called(1);
+      verify(() => mockNavigator.push(any())).called(2);
     });
   });
 }
