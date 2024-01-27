@@ -17,11 +17,6 @@ class LoginViewModel {
     _cache[email] = password;
   }
 
-  @visibleForTesting
-  void clearCache() {
-    _cache.clear();
-  }
-
   bool login(String email, String password) {
     if (_cache.containsKey(email)) {
       return password == _cache[email];
