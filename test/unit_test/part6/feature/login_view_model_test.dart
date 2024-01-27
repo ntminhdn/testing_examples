@@ -5,14 +5,14 @@ import 'package:testing_examples/part6/feature/login_view_model.dart';
 
 class MockNavigator extends Mock implements Navigator {}
 
-class MockBuildContext extends Fake implements BuildContext {}
+class FakeBuildContext extends Fake implements BuildContext {}
 
 void main() {
   late MockNavigator mockNavigator;
   late LoginViewModel loginViewModel;
 
   setUpAll(() {
-    registerFallbackValue(MockBuildContext());
+    registerFallbackValue(FakeBuildContext());
   });
 
   setUp(() {
@@ -26,7 +26,7 @@ void main() {
       String email = '';
 
       // Act
-      loginViewModel.login(MockBuildContext(), email);
+      loginViewModel.login(FakeBuildContext(), email);
 
       // Assert
       verifyNever(() => mockNavigator.push(any(), any()));
@@ -37,7 +37,7 @@ void main() {
       String email = 'ntminh@gmail.com';
 
       // Act
-      loginViewModel.login(MockBuildContext(), email);
+      loginViewModel.login(FakeBuildContext(), email);
 
       // Assert
       verify(() => mockNavigator.push(any(), any())).called(1);
