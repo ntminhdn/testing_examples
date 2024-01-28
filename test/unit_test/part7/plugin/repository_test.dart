@@ -14,7 +14,7 @@ void main() {
     repository = Repository(firebaseFirestoreService: mockFirebaseFirestoreService);
   });
 
-  test('description', () async{
+  test('getMyJob should return what the API returns', () async{
     // Stub
     when(() => mockFirebaseFirestoreService.getMyJob()).thenAnswer(
       (_) async => {'data': 'IT'},

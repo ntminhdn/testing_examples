@@ -27,7 +27,7 @@ void main() {
     );
   });
 
-  test('getMyJob should return ', () async {
+  test('getMyJob should return what the API returns', () async {
     // Stub
     when(() => mockAppServerApiClient.request('/me/job')).thenAnswer(
       (_) async => Response(
