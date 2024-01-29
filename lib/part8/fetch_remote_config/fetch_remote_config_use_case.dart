@@ -12,9 +12,8 @@ class FetchRemoteConfigUseCase {
     final currentAppVersion = _getCurrentAppVersion();
     var matchedVersion = _checkForceUpdate(remoteConfig.versionList, currentAppVersion);
 
-    final lastRecommendTime = DateTime.tryParse(repository.showRecommendUpdateVersionTime);
-    final lastShowImportantNotice = DateTime.tryParse(repository.showImportantNoticeTime);
-
+    final lastRecommendTime = DateTime.tryParse(repository.lastRecommendTime);
+    final lastShowImportantNotice = DateTime.tryParse(repository.lastShowImportantNotice);
 
     return UseCaseOutput(
       remoteConfig: matchedVersion?.config ?? remoteConfig.defaultConfig,
