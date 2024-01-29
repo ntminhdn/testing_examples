@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'remote_config.freezed.dart';
+part 'model.freezed.dart';
 
 @freezed
 class RemoteConfig with _$RemoteConfig {

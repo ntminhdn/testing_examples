@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:testing_examples/part9/migration/new_job_data.dart';
 
 part 'job_data.g.dart';
 
@@ -20,4 +21,11 @@ class JobData {
 
   @override
   int get hashCode => title.hashCode;
+
+  NewJobData migrate() {
+    return NewJobData()
+      ..title = title
+      ..desciption = ''
+      ..postedAt = 0;
+  }
 }
